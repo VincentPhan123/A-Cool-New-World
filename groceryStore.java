@@ -1,3 +1,4 @@
+
 import java.util.*;
 public class groceryStore {
 	public static void main (String[] args) {
@@ -43,7 +44,7 @@ public class groceryStore {
 		Double inputPrice = reader.nextDouble();
 		al.add(inputPrice);
 		System.out.println("Enter the amount:");
-		double inputAmount = reader.nextDouble();
+		int inputAmount = reader.nextInt();
 		al.add(inputAmount);		
 	}
 	
@@ -78,13 +79,13 @@ public class groceryStore {
 		index += 1;
 		System.out.println("Ok what will be " + input + "'s new price?");
 		double newPrice = reader.nextDouble();
-		al.set(index,newPrice);
+		al.set(index , newPrice);
 	}
 	
 	static void checkItem(ArrayList al, Scanner reader) {
 		System.out.println("Enter b to go to back the MENU\nStatus Check\nEnter Item: ");
 		String input = reader.next().toUpperCase();
-	
+		double totalPrice = 0;
 		if(input.contentEquals("B")) {
 			System.out.println("Item List\n");
 			menu(al,reader);
@@ -93,13 +94,14 @@ public class groceryStore {
 			System.out.println("Sorry that item is not in the system. Enter your item again.");
 			checkItem(al, reader);
 		}
-		int index1 = al.indexOf(input + 1);
-		
-		int index2 = al.indexOf(input + 2);
-		
-		
-		double finalPrice = (double)al.get(index1) * (double)al.get(index2);
-		System.out.println(input + " price: $" + al.get(index1) + " quantity: " + al.get(index2) + " total price: $" + finalPrice / 2);
+		int index1 = al.indexOf(input);
+		index1 += 1;
+		int index2 = al.indexOf(input);
+		index2 += 2;
+		double price = (double)al.get(index1);
+		double inventory = (double)(int)al.get(index2);
+		totalPrice = price * inventory;
+		System.out.println(input + " price: $" + al.get(index1) + " quantity: " + al.get(index2) + " Total Price: " + totalPrice);
 	}
 	
 	static void printList(ArrayList al) {
@@ -108,37 +110,25 @@ public class groceryStore {
 	
 	static void inventoryCheck(ArrayList al, Scanner reader) {
 		System.out.println("Enter b to go to back the MENU\nInventory Check");
-		String input = reader.next();
-		int inventory = 0;
-		double totalPrice1 = 0;
-		double totalPrice2 = 0;
-		double finalPrice = 0;
-		
-		if(input.contentEquals("B")) {
-			System.out.println("Item List\n");
-			menu(al,reader);
-		}
+		int totalInventory = 0;
+		double totalPrice = 0;
 		
 		if(al.size() == 3) {
 			System.out.println("Total Inventory: " + al.get(2));
 		}else if(al.size() >= 6) {
 			for(int i = 2; i < al.size(); i += 3) {
-				inventory += (double)al.get(i);
+				totalInventory += (int)al.get(i);
 			}
-			System.out.println("Total Inventory: " + inventory);
+			System.out.println("Total Inventory: " + totalInventory);
 		}
 		
 		if(al.size() == 3) {
-			System.out.println("Total Price: " + al.get(1));
+			System.out.println("Total Price: $" + al.get(1));
 		}else if(al.size() >= 6) {
 			for(int i = 1; i < al.size(); i += 3) {
-				totalPrice1 += (double)al.get(i);
-				for(int j = 2; j < al.size(); j += 3) {
-					totalPrice2 += (double)al.get(j);
-				}
+				totalPrice += (double)al.get(i);
 			}
-			finalPrice = totalPrice1 * totalPrice2;
-			System.out.println("Total price: $" + finalPrice / 2);
+			System.out.println("Total price: $" + totalPrice);
 		}
 		
 	}
