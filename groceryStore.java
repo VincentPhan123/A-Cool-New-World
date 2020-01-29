@@ -44,7 +44,7 @@ public class groceryStore {
 		Double inputPrice = reader.nextDouble();
 		al.add(inputPrice);
 		System.out.println("Enter the amount:");
-		int inputAmount = reader.nextInt();
+		double inputAmount = reader.nextDouble();
 		al.add(inputAmount);		
 	}
 	
@@ -99,9 +99,9 @@ public class groceryStore {
 		int index2 = al.indexOf(input);
 		index2 += 2;
 		double price = (double)al.get(index1);
-		double inventory = (double)(int)al.get(index2);
+		double inventory = (double)al.get(index2);
 		totalPrice = price * inventory;
-		System.out.println(input + " price: $" + al.get(index1) + " quantity: " + al.get(index2) + " Total Price: " + totalPrice);
+		System.out.println(input + " price: $" + al.get(index1) + " quantity: " + al.get(index2) + " Total Price: $" + totalPrice);
 	}
 	
 	static void printList(ArrayList al) {
@@ -110,26 +110,31 @@ public class groceryStore {
 	
 	static void inventoryCheck(ArrayList al, Scanner reader) {
 		System.out.println("Enter b to go to back the MENU\nInventory Check");
-		int totalInventory = 0;
+		
+		double totalInventory = 0;
 		double totalPrice = 0;
+		double finalPrice = 0;
 		
 		if(al.size() == 3) {
 			System.out.println("Total Inventory: " + al.get(2));
 		}else if(al.size() >= 6) {
 			for(int i = 2; i < al.size(); i += 3) {
-				totalInventory += (int)al.get(i);
+				totalInventory += (double)al.get(i);
 			}
 			System.out.println("Total Inventory: " + totalInventory);
 		}
 		
-		if(al.size() == 3) {
-			System.out.println("Total Price: $" + al.get(1));
-		}else if(al.size() >= 6) {
-			for(int i = 1; i < al.size(); i += 3) {
-				totalPrice += (double)al.get(i);
-			}
-			System.out.println("Total price: $" + totalPrice);
+	
+		for(int i = 1; i < al.size(); i += 3) {
+			totalPrice += (double)al.get(i);
+			finalPrice = (totalPrice * totalInventory);
 		}
 		
+		
+		System.out.println("Total Price: $" + finalPrice);
+		String input = reader.next().toLowerCase();
+		if(input.contentEquals("b")) {
+			menu(al,reader);
+		}
 	}
 }
