@@ -138,6 +138,8 @@ public class matrixCalculator{
 
     static int[][] mulMatrix(int[][] matrix1, int [][] matrix2){
         int [][] productMatrix = new int [matrix1.length][matrix2[0].length];
+        int [][] mismatched = {{-1, -1}, {-1,-1}};
+        
         if(canMultiply(matrix1, matrix2) == true){
             for(int rows = 0; rows < matrix1.length; rows++) {
                 for (int cols2 = 0; cols2 < matrix2[0].length; cols2++) {
@@ -148,17 +150,13 @@ public class matrixCalculator{
             }
             return productMatrix;
         }else{
-            productMatrix = new int [2][2];
-            for(int i = 0; i < productMatrix.length; i++){
-                for(int j = 0; j < productMatrix[0].length; j++){
-                    productMatrix[i][j] = -1;
-                }
-            }
-            return productMatrix;
+            return mismatched;
         }
     }
 
     static int findDeterminant(int[][] matrix1, int [][] matrix2){
-        return 0;
+        int determinant = 0;
+        return determinant;
+        
     }
 }
