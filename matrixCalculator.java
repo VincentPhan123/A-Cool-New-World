@@ -4,22 +4,27 @@ public class matrixCalculator{
    public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         System.out.println("WELCOME TO MY MATRIX CALCULATOR!\n~~~~~~~~~~~~~~~~~");
-        System.out.println("Create your first matrix\n~~~~~~~~~~~~~~~~");
+        System.out.println("Create your first matrix:\n~~~~~~~~~~~~~~~~");
         int [][] matrix1 = new int [0][0];
         matrix1 = makeMatrix(matrix1, reader);
         printMatrix(matrix1);
-        System.out.println("Create your second matrix\n~~~~~~~~~~~~~~~~");
+        System.out.println("Create your second matrix:\n~~~~~~~~~~~~~~~~");
         int [][] matrix2 = new int [0][0];
         matrix2 = makeMatrix(matrix2, reader);
         printMatrix(matrix2);
-        menu(matrix1, matrix2, reader);
+        System.out.println("Create a matrix that you would like to find the determinant for:\n~~~~~~~~~~~~~~~~");
+        int [][] determinantMatrix = new int [0][0];
+        determinantMatrix = makeMatrix(determinantMatrix, reader);
+        printMatrix(determinantMatrix);
+        menu(matrix1, matrix2, determinantMatrix, reader);
     }
 
-   	static void menu(int [][] matrix1, int [][] matrix2, Scanner reader) {
+   	static void menu(int [][] matrix1, int [][] matrix2, int [][] determinantMatrix, Scanner reader) {
            boolean done = false;
            int [][] sum = new int [0][0];
            int [][] difference = new int [0][0];
            int [][] product = new int [0][0];
+           int determinant = 0;
 	   	while(!done){
 	        System.out.println("MENU\n----\n1)ADD MATRICES\n2)SUBTRACT MATRICES\n3)MULTIPLY MACTICES\n4)FIND DETERMINANT\n5)QUIT");
 	        int input = reader.nextInt();
@@ -27,20 +32,22 @@ public class matrixCalculator{
                 addMatrix(matrix1, matrix2);
                 sum = addMatrix(matrix1, matrix2);
                 printMatrix(sum);
-	            menu(matrix1, matrix2, reader);
+	            menu(matrix1, matrix2, determinantMatrix, reader);
 	        }else if(input == 2){
                 subMatrix(matrix1, matrix2);
                 difference = subMatrix(matrix1, matrix2);
                 printMatrix(difference);
-	            menu(matrix1, matrix2, reader);
-	        }else if(input == 3){
+                menu(matrix1, matrix2, determinantMatrix, reader);	  
+            }else if(input == 3){
                 mulMatrix(matrix1, matrix2);
                 product = mulMatrix(matrix1, matrix2);
                 printMatrix(product);
-	            menu(matrix1, matrix2, reader);
+                menu(matrix1, matrix2, determinantMatrix, reader);
 	        }else if(input == 4){
-	            System.out.println(findDeterminant(matrix1, matrix2));
-	            menu(matrix1, matrix2, reader);
+                System.out.println(findDeterminant(determinantMatrix));
+                determinant = findDeterminant(determinantMatrix);
+                System.out.println(determinant);
+                menu(matrix1, matrix2, determinantMatrix, reader);
 	        }else{
 	            done = true;
 	        }
@@ -138,8 +145,7 @@ public class matrixCalculator{
 
     static int[][] mulMatrix(int[][] matrix1, int [][] matrix2){
         int [][] productMatrix = new int [matrix1.length][matrix2[0].length];
-        int [][] mismatched = {{-1, -1}, {-1,-1}};
-        
+        int [][] mismatch = {{-1,-1},{-1,-1}};
         if(canMultiply(matrix1, matrix2) == true){
             for(int rows = 0; rows < matrix1.length; rows++) {
                 for (int cols2 = 0; cols2 < matrix2[0].length; cols2++) {
@@ -150,13 +156,24 @@ public class matrixCalculator{
             }
             return productMatrix;
         }else{
-            return mismatched;
+            return mismatch;
         }
     }
 
-    static int findDeterminant(int[][] matrix1, int [][] matrix2){
+    static int findDeterminant(int[][] determinantMatrix){
         int determinant = 0;
-        return determinant;
+        int a = 0;
+        int b = 0;
+        int c = 0;
         
+        if(determinantMatrix.length == 2){
+            determinant = (determinantMatrix[0][0] * determinantMatrix[1][1]) - (determinantMatrix[0][1] * determinantMatrix[1][0]);
+        }else if(determinantMatrix.length == 3){
+            a = determinantMatrix[0][0]*(determinantMatrix[1][1] * determinantMatrix[2][2] - determinantMatrix[1][2] * determinantMatrix[2][1]);
+            b = determinantMatrix[0][1]*(determinantMatrix[1][0] * determinantMatrix[2][2] - determinantMatrix[1][2] * determinantMatrix[2][0]);
+            c = determinantMatrix[0][2]*(determinantMatrix[1][0] * determinantMatrix[2][1] - determinantMatrix[1][1] * determinantMatrix[2][0]);
+            determinant = a - b + c;
+        }
+        return determinant;
     }
-}
+}                     
