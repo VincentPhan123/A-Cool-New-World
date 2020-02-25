@@ -1,0 +1,12 @@
+
+public class FractionTest {
+
+	public static void main(String[] args) {
+		Fraction f1 = new Fraction(3,5);
+		Fraction f2 = new Fraction(2,4);
+		
+		System.out.println(Fraction.addFrac(f1,f2));
+		System.out.println(Fraction.subFrac(f1,f2));
+		
+	}
+}
