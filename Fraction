@@ -1,0 +1,44 @@
+public class Fraction {
+	private int numer = 0;
+	private int denom = 1;
+	
+	public Fraction(int n) {
+		this.numer = n;
+		this.denom = 1;
+	}
+	
+	public Fraction(int n, int d) {
+		this.numer = n;
+		this.denom = d;
+	}
+	
+	static String addFrac(Fraction frac1, Fraction frac2) {
+		String frac = "";
+		if(frac1.denom == frac2.denom) {
+			int numSum = frac1.numer + frac2.numer;
+			frac = "Sum: " + numSum + " / " + frac1.denom; 
+		}else {
+			int newDen = frac1.denom * frac2.denom;
+			int num1 = frac1.numer * frac2.denom;
+			int num2 = frac2.numer * frac1.denom;
+			int numSum = num1 + num2;
+			frac = "Sum: " + numSum + " / " + newDen;
+		}
+		return frac;
+	}
+	
+	static String subFrac(Fraction frac1, Fraction frac2) {
+		String frac = "";
+		if(frac1.denom == frac2.denom) {
+			int numDiff = frac1.numer - frac2.numer;
+			frac = "Difference: " + numDiff + " / " + frac1.denom; 
+		}else{
+			int newDen = frac1.denom * frac2.denom;
+			int num1 = frac1.numer * frac2.denom;
+			int num2 = frac2.numer * frac1.denom;
+			int numDiff = num1 - num2;
+			frac = "Difference: " + numDiff + " / " + newDen;
+		}
+		return frac;
+	}
+}
