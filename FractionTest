@@ -1,12 +1,33 @@
-
+import java.util.*;
 public class FractionTest {
 
 	public static void main(String[] args) {
-		Fraction f1 = new Fraction(3,5);
-		Fraction f2 = new Fraction(2,4);
-		
-		System.out.println(Fraction.addFrac(f1,f2));
+        Scanner sc = new Scanner (System.in);
+        System.out.println("Enter the numerator for the first fraction:");
+        int n1 = sc.nextInt();
+        System.out.println("Enter the denomenator for the first fraction:");
+        int d1 = sc.nextInt();
+        System.out.println("Enter the numerator for the second fraction:");
+        int n2 = sc.nextInt();
+        System.out.println("Enter the denomenator for the second fraction:");
+        int d2 = sc.nextInt();
+
+		Fraction f1 = new Fraction(n1,d1);
+        Fraction f2 = new Fraction(n2,d2);
+
+        System.out.println(Fraction.addFrac(f1,f2));
 		System.out.println(Fraction.subFrac(f1,f2));
-		
+        System.out.println(Fraction.mulFrac(f1, f2));
+        System.out.println(Fraction.divideFrac(f1, f2));
+        
+        //test
+        Fraction t1 = new Fraction(2, 3);
+        Fraction t2 = new Fraction(1,3);
+
+        //test
+        System.out.println(Fraction.addFrac(t1,t2));
+		System.out.println(Fraction.subFrac(t1,t2));
+        System.out.println(Fraction.mulFrac(t1, t2));
+        System.out.println(Fraction.divideFrac(t1, t2));
 	}
 }
