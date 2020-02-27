@@ -11,6 +11,15 @@ public class Fraction {
 		this.numer = n;
 		this.denom = d;
     }
+	
+	static String simplify(Fraction frac) {
+		int gcd = 0;
+		
+		for(int i = 1; i <= frac.numer && i <= frac.denom; i++){
+            if(frac.numer % i == 0 && frac.denom % i == 0)
+                gcd = i;
+        }
+	}
     
 	static String addFrac(Fraction frac1, Fraction frac2) {
         String frac = "";
