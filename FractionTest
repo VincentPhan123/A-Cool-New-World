@@ -1,8 +1,8 @@
 import java.util.*;
 public class FractionTest {
-
 	public static void main(String[] args) {
         Scanner sc = new Scanner (System.in);
+        
         System.out.println("Enter the numerator for the first fraction:");
         int n1 = sc.nextInt();
         System.out.println("Enter the denomenator for the first fraction:");
@@ -12,22 +12,39 @@ public class FractionTest {
         System.out.println("Enter the denomenator for the second fraction:");
         int d2 = sc.nextInt();
 
-		Fraction f1 = new Fraction(n1,d1);
-        Fraction f2 = new Fraction(n2,d2);
+		Fraction t1 = new Fraction(n1, d1);
+        Fraction t2 = new Fraction(n2, d2);
+        int [] sum = Fraction.addFrac(t1,t2);
+        int [] simpSum = Fraction.simplify(sum);
+        int [] difference = Fraction.subFrac(t1, t2);
+        int [] simpDifference = Fraction.simplify(difference);
+        int [] product = Fraction.mulFrac(t1, t2);
+        int [] simpProduct = Fraction.simplify(product);
+        int [] quotionent = Fraction.divideFrac(t1, t2);
+        int [] simpQuotionent = Fraction.simplify(quotionent);
 
-        System.out.println(Fraction.addFrac(f1,f2));
-		System.out.println(Fraction.subFrac(f1,f2));
-        System.out.println(Fraction.mulFrac(f1, f2));
-        System.out.println(Fraction.divideFrac(f1, f2));
+        System.out.println("Sum: " + simpSum[0] + " / " + simpSum[1]);
+        System.out.println("Difference: " + simpDifference[0] + " / " + simpDifference[1]);
+        System.out.println("Product: " + simpProduct[0] + " / " + simpProduct[1]);
+        System.out.println("Qutionent: " + simpQuotionent[0] + " / " + simpQuotionent[1]);
         
-        //test
-        Fraction t1 = new Fraction(2, 3);
-        Fraction t2 = new Fraction(1,3);
 
-        //test
-        System.out.println(Fraction.addFrac(t1,t2));
-		System.out.println(Fraction.subFrac(t1,t2));
-        System.out.println(Fraction.mulFrac(t1, t2));
-        System.out.println(Fraction.divideFrac(t1, t2));
+        /*
+        Fraction t1 = new Fraction(2, 10);
+        Fraction t2 = new Fraction(6,10);
+        int [] sum = Fraction.addFrac(t1,t2);
+        int [] simpSum = Fraction.simplify(sum);
+        int [] difference = Fraction.subFrac(t1, t2);
+        int [] simpDifference = Fraction.simplify(difference);
+        int [] product = Fraction.mulFrac(t1, t2);
+        int [] simpProduct = Fraction.simplify(product);
+        int [] quotionent = Fraction.divideFrac(t1, t2);
+        int [] simpQuotionent = Fraction.simplify(quotionent);
+        
+        System.out.println("Sum: " + simpSum[0] + " / " + simpSum[1]);
+		System.out.println("Difference: " + simpDifference[0] + " / " + simpDifference[1]);
+        System.out.println("Product: " + simpProduct[0] + " / " + simpProduct[1]);
+        System.out.println("Qutionent: " + simpQuotionent[0] + " / " + simpQuotionent[1]);
+        */
 	}
 }
