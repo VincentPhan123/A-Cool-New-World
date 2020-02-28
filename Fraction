@@ -1,3 +1,4 @@
+import java.util.*;
 public class Fraction {
 	private int numer = 0;
 	private int denom = 1;
@@ -12,58 +13,84 @@ public class Fraction {
 		this.denom = d;
     }
 	
-	static String simplify(Fraction frac) {
-		int gcd = 0;
-		
-		for(int i = 1; i <= frac.numer && i <= frac.denom; i++){
-            if(frac.numer % i == 0 && frac.denom % i == 0)
-                gcd = i;
+    static int[] simplify(int[] arr) {
+        int gcd = 0;
+        int [] numbers = new int [2];
+        int num = 0;
+        int den = 0;
+		if(arr[0] > 0){
+            for(int i = 1; i <= arr[0] && i <= arr[1]; i++){
+                if(arr[0] % i == 0 && arr[1] % i == 0){
+                    gcd = i;
+                }
+            }
+        }else{
+            for (int i = Math.abs(arr[0]); i >= 1; i--){
+                if (arr[0] % i == 0 && arr[1] % i == 0){
+                    gcd = i;
+                }
+            }
         }
-	}
-    
-	static String addFrac(Fraction frac1, Fraction frac2) {
-        String frac = "";
+
+        if(gcd != 0){
+            num = arr[0] / gcd;
+            den = arr[1] / gcd;
+            numbers[0] = num;
+            numbers[1] = den;
+        }
+        
+        return numbers;
+    }
+      
+	static int[] addFrac(Fraction frac1, Fraction frac2) {
+        int [] frac = new int [2];
         if(frac1.denom == frac2.denom) {
             int numSum = frac1.numer + frac2.numer;
-            frac = "Sum: " + numSum + " / " + frac1.denom; 
+            frac[0] = numSum; 
+            frac[1] = frac1.denom;
         }else {
             int newDen = frac1.denom * frac2.denom;
             int num1 = frac1.numer * frac2.denom;
             int num2 = frac2.numer * frac1.denom;
             int numSum = num1 + num2;
-            frac = "Sum: " + numSum + " / " + newDen;
+            frac[0] = numSum;
+            frac[1] = newDen;
         }
 		return frac;
 	}
 	
-	static String subFrac(Fraction frac1, Fraction frac2) {
-        String frac = "";
+	static int[] subFrac(Fraction frac1, Fraction frac2) {
+        int [] frac = new int [2];
         if(frac1.denom == frac2.denom) {
             int numDiff = frac1.numer - frac2.numer;
-            frac = "Difference: " + numDiff + " / " + frac1.denom; 
-           }else{
-               int newDen = frac1.denom * frac2.denom;
-               int num1 = frac1.numer * frac2.denom;
-               int num2 = frac2.numer * frac1.denom;
-               int numDiff = num1 - num2;
-               frac = "Difference: " + numDiff + " / " + newDen;
+            frac[0] = numDiff;
+            frac[1] = frac2.denom;
+        }else{
+            int newDen = frac1.denom * frac2.denom;
+            int num1 = frac1.numer * frac2.denom;
+            int num2 = frac2.numer * frac1.denom;
+            int numDiff = num1 - num2;
+            frac[0] = numDiff;
+            frac[1] = newDen;
             }
 		return frac;
     }
     
-    static String mulFrac(Fraction frac1, Fraction frac2){
-        String frac = "";
+    static int [] mulFrac(Fraction frac1, Fraction frac2){
+        int [] frac = new int [2];
         int productNum = frac1.numer * frac2.numer;
         int productDen = frac1.denom * frac2.denom;
-        frac = "Product: " + productNum + " / " + productDen;
+        frac[0] = productNum;
+        frac[1] = productDen;
         return frac;
     }
 
-    static String divideFrac(Fraction frac1, Fraction frac2){
-        String frac = "";
+    static int [] divideFrac(Fraction frac1, Fraction frac2){
+        int [] frac = new int [2];
         int numQuotient = frac1.numer * frac2.denom;
         int denQuotient = frac1.denom * frac2.numer;
-        frac = "Quotient: " + numQuotient + " / " + denQuotient;
+        frac[0] = numQuotient;
+        frac[1] = denQuotient;
         return frac;
     }
 }
