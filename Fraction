@@ -25,7 +25,7 @@ public class Fraction {
                 }
             }
         }else{
-            for (int i = Math.abs(arr[0]); i >= 1; i++){
+            for (int i = 1; i <= Math.abs(arr[0]); i++){
                 if (arr[0] % i == 0 && arr[1] % i == 0){
                     gcd = i;
                 }
@@ -37,6 +37,9 @@ public class Fraction {
             den = arr[1] / gcd;
             numbers[0] = num;
             numbers[1] = den;
+        }else {
+        	arr[0] = numbers[0];
+        	arr[1] = numbers[1];
         }
         
         return numbers;
